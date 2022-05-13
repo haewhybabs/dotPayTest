@@ -1,0 +1,1 @@
+export const splashColor = '#E4FFE0';
