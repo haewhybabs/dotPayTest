@@ -1,0 +1,1 @@
+export const GET_BALLOT_DATA = "api/getBallotData";
