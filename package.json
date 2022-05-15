@@ -31,11 +31,6 @@
   },
   "jest": {
     "preset": "react-native"
-  },
-  "rnpm": {
-    "assets": [
-      "./app/assets/fonts/Roboto"
-    ]
   }
 }
 

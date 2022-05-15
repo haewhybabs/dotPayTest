@@ -10,7 +10,7 @@ export default function Texts({
 }) {
   return (
     <Text
-      style={{...styles.text,style,
+      style={{...styles.text,...style,
         fontFamily: medium
         ? "Roboto-Medium"
         : bold
