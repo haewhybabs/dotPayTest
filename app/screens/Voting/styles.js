@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 // const { width, height } = Dimensions.get('window');
-import {buttonBorder, categoryHeader, nomineeBorder, nomineeCard, pageBackground, splashColor} from '../../constants/colors'
+import {buttonBorder, categoryHeader, nomineeBorder, nomineeCard, pageBackground, splashColor, submitButton} from '../../constants/colors'
 import { height, width } from '../../constants/dimensions';
 export default StyleSheet.create({
     container: {
@@ -50,5 +50,9 @@ export default StyleSheet.create({
         borderRadius:4,
         borderColor:buttonBorder,
         marginTop:-10
+    },
+    submitButton:{
+        height:50,
+        backgroundColor:submitButton
     }
 })

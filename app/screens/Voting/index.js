@@ -5,9 +5,11 @@ import Header from '../../components/Header'
 import Button from '../../components/Button';
 import Texts from '../../components/Texts'
 import { API } from '../../api';
+import { selectedNomineeCard } from '../../constants/colors';
 
 export default function Voting() {
   const [data,setData]=React.useState([]);
+  const [selectedData,setSelectedData]=React.useState([]);
   React.useEffect(()=>{
     fetchData();
   },[])
@@ -21,9 +23,28 @@ export default function Voting() {
       }
     })
   }
+  const handleSelect = (id,category) =>{
+    let newData = [...selectedData];
+    let index= newData.findIndex((item)=>item.category===category);
+    if(index>=0){
+      newData[index].id =id; 
+      // update
+    }
+    else{
+      newData = [...selectedData,{id,category}]
+      // insert
+    }
+    setSelectedData(newData)  
+  }
   const renderCard = (element,category)=>{
+    let selected = false;
+    let checkSelected = selectedData.filter(function(item){
+      if(item.id===element.id && item.category===category){
+        selected = true
+      }
+    })
     return(
-      <View style={styles.card} key={element.id}>
+      <View style={!selected?styles.card:{...styles.card,backgroundColor:selectedNomineeCard}} key={element.id}>
         <Texts style={styles.nomineeText}>{element.title}</Texts>
         <Image 
         source={{uri:element.photoUrL}}
@@ -32,6 +53,7 @@ export default function Voting() {
         <Button 
         style={styles.button}
         title="Select"
+        onPress={()=>handleSelect(element.id,category)}
         />
       </View>
     )
@@ -61,6 +83,10 @@ export default function Voting() {
         data={data}
         renderItem={contentRender}
         keyExtractor={item => item.id}
+      />
+      <Button 
+      title="Submit Vote"
+      style={styles.submitButton}
       />
     </View>
   )
