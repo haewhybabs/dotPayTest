@@ -54,5 +54,16 @@ export default StyleSheet.create({
     submitButton:{
         height:50,
         backgroundColor:submitButton
+    },
+    successModal:{
+        height:100,
+        width:100,
+        alignSelf:'center',
+        marginTop:30
+    },
+    successText:{
+        textAlign:'center',
+        marginTop:20,
+        fontSize:18
     }
 })

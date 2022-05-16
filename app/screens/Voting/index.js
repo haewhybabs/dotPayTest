@@ -4,12 +4,14 @@ import styles from './styles'
 import Header from '../../components/Header'
 import Button from '../../components/Button';
 import Texts from '../../components/Texts'
+import AppModal from '../../components/Modal'
 import { API } from '../../api';
 import { selectedNomineeCard } from '../../constants/colors';
 
 export default function Voting() {
   const [data,setData]=React.useState([]);
   const [selectedData,setSelectedData]=React.useState([]);
+  const [toggleModal,setToggleModal]=React.useState(false);
   React.useEffect(()=>{
     fetchData();
   },[])
@@ -35,6 +37,17 @@ export default function Voting() {
       // insert
     }
     setSelectedData(newData)  
+  }
+  const handleSubmit = () =>{
+    if(data.length !=selectedData.length){
+      alert('You have not selected from all the categories')
+      return;
+    }
+    setToggleModal(true)
+  }
+  const handleClose = (status) =>{
+    setSelectedData([]);
+    setToggleModal(status)
   }
   const renderCard = (element,category)=>{
     let selected = false;
@@ -87,7 +100,20 @@ export default function Voting() {
       <Button 
       title="Submit Vote"
       style={styles.submitButton}
+      disabled={data.length?false:true}
+      onPress={handleSubmit}
       />
+      <AppModal 
+      toggleValue={toggleModal}
+      title="Success"
+      updateModal={handleClose}
+      >
+        <Image 
+        source = {require('../../assets/images/success.png')}
+        style={styles.successModal}
+        />
+        <Texts style={styles.successText}>You have voted successfully</Texts>
+      </AppModal>
     </View>
   )
 }
